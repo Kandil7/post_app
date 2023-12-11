@@ -33,15 +33,21 @@ class PostScreenBody extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is PostLoadingState) {
-          return const LoadingWidget();
+          return  LoadingWidget();
         } else if (state is PostLoadedState) {
-          return PostWidget(posts: state.posts);
+          return RefreshIndicator(
+            onRefresh: ()=> _onRefresh(context),
+            child: PostWidget(posts: state.posts));
         } else if (state is PostErrorState) {
           return MessageWidget(message: state.message);
         } else {
-          return const LoadingWidget();
+          return  LoadingWidget();
         }
       },
     );
+  }
+  
+ Future<void> _onRefresh(BuildContext context) async{
+    BlocProvider.of<PostBloc>(context).add(RefreshPostEvent());
   }
 }
