@@ -39,7 +39,9 @@ class PostScreenBody extends StatelessWidget {
             onRefresh: ()=> _onRefresh(context),
             child: PostWidget(posts: state.posts));
         } else if (state is PostErrorState) {
-          return MessageWidget(message: state.message);
+          return RefreshIndicator(
+            onRefresh: ()=> _onRefresh(context),
+            child: MessageWidget(message: state.message));
         } else {
           return  LoadingWidget();
         }
