@@ -5,6 +5,7 @@ import 'package:post_app/Feature/presentation/widgets/message_widget.dart';
 import '../../../core/widget/loading_widget.dart';
 import '../bloc/posts_bloc/post_bloc.dart';
 import '../widgets/post_widget.dart';
+import 'add_update_post_screen.dart';
 
 class PostsScreen extends StatelessWidget {
   const PostsScreen({super.key});
@@ -18,8 +19,20 @@ class PostsScreen extends StatelessWidget {
 
       ),
       body:  PostScreenBody(),
+
+      floatingActionButton: _buildFloatingActionButton(context),
     );
   }
+}
+
+Widget _buildFloatingActionButton(BuildContext context) {
+  return FloatingActionButton(
+    onPressed: () {
+      Navigator.of(context).push(
+          MaterialPageRoute(builder: (_) => const AddUpdatePostScreen(isUpdate: false,)));
+    },
+    child: const Icon(Icons.add),
+  );
 }
 
 class PostScreenBody extends StatelessWidget {
@@ -33,15 +46,17 @@ class PostScreenBody extends StatelessWidget {
       },
       builder: (context, state) {
         if (state is PostLoadingState) {
-          return  LoadingWidget();
+          return  const LoadingWidget();
         } else if (state is PostLoadedState) {
           return RefreshIndicator(
             onRefresh: ()=> _onRefresh(context),
             child: PostWidget(posts: state.posts));
         } else if (state is PostErrorState) {
-          return MessageWidget(message: state.message);
+          return RefreshIndicator(
+            onRefresh: ()=> _onRefresh(context),
+            child: MessageWidget(message: state.message));
         } else {
-          return  LoadingWidget();
+          return  const LoadingWidget();
         }
       },
     );

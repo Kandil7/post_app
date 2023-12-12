@@ -1,7 +1,6 @@
 import 'package:bloc/bloc.dart';
 import 'package:dartz/dartz.dart';
 import 'package:equatable/equatable.dart';
-import 'package:flutter/material.dart';
 import 'package:post_app/Feature/domain/entities/post_entities.dart';
 import 'package:post_app/core/strings/failure_message.dart';
 

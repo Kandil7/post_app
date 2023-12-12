@@ -6,14 +6,28 @@ class MessageWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      padding: const EdgeInsets.all(20),
-      alignment: Alignment.center,
-      child:  Text(
-        message,
-        style: TextStyle(
-          fontSize: 20,
-          fontWeight: FontWeight.bold,
+    return Center(
+      child: Container(
+        padding: const EdgeInsets.all(20),
+        alignment: Alignment.center,
+        child:  Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const Icon(
+              Icons.error_outline,
+              color: Colors.red,
+              size: 60,
+            ),
+            const SizedBox(height: 20),
+            Text(
+              message,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
         ),
       ),
     );

@@ -2,7 +2,7 @@ import 'package:post_app/Feature/domain/entities/post_entities.dart';
 
 class PostModel extends PostEntities {
   const PostModel(
-      {required int id,
+      {required int? id,
       required String title,
       required String body,
       })

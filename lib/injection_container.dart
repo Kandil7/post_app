@@ -11,6 +11,7 @@ import 'Feature/domain/repositories/post_repository.dart';
 import 'Feature/domain/use_cases/create_post.dart';
 import 'Feature/domain/use_cases/delet_post.dart';
 import 'Feature/domain/use_cases/get_post.dart';
+import 'Feature/domain/use_cases/update_post.dart';
 import 'Feature/presentation/bloc/posts_bloc/post_bloc.dart';
 import 'core/network_info/network_info.dart';
 
@@ -33,6 +34,8 @@ Future<void> init() async {
   sl.registerLazySingleton(() => CreatePost(sl()));
 
   sl.registerLazySingleton(() => DeletePost(sl()));
+
+  sl.registerLazySingleton(() => UpdatePost(sl()));
 
 // Repository
 

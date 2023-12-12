@@ -25,7 +25,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => di.sl<AddUpdateDeletePostBloc>()),
       ],
      
-      child: MaterialApp(
+      child: const MaterialApp(
         title: 'Post App',
       debugShowCheckedModeBanner: false,
         

@@ -13,7 +13,7 @@ abstract class RemoteDataSources {
   Future<Unit> deletePost(int postId);
 }
 
-const String POSTS_URL = 'https://jsonplaceholder.typicode.com/posts';
+const String POSTS_URL = 'https://jsonplaceholder.typicode.com/posts/';
 
 class RemoteDataSourcesImpl implements RemoteDataSources {
   final http.Client client;
@@ -28,7 +28,7 @@ class RemoteDataSourcesImpl implements RemoteDataSources {
         'Content-Type': 'application/json',
       },
     );
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200||response.statusCode == 201) {
       final List<dynamic> jsonList = json.decode(response.body);
       final List<PostModel> posts =
           jsonList.map((e) => PostModel.fromJson(e)).toList();
@@ -40,13 +40,13 @@ class RemoteDataSourcesImpl implements RemoteDataSources {
 
   @override
   Future<Unit> createPost(PostModel post) async {
-    var body = {'title': post.title, 'body': post.body};
+    var body = {"title": post.title, "body": post.body};
     final respose = await client.post(Uri.parse(POSTS_URL),
-        // headers: {'Content-Type': 'applcation/json'},
         body: body);
-    if (respose.statusCode == 200) {
+    if (respose.statusCode == 200||respose.statusCode == 201) {
       return Future.value(unit);
     } else {
+      print(respose.statusCode);
       throw ServerException();
     }
   }
@@ -55,7 +55,7 @@ class RemoteDataSourcesImpl implements RemoteDataSources {
   Future<Unit> deletePost(int postId) async {
     final response =
         await client.delete(Uri.parse(POSTS_URL + '/${postId.toString()}'));
-    if (response.statusCode == 200) {
+    if (response.statusCode == 200||response.statusCode == 201) {
       return Future.value(unit);
     } else {
       throw ServerException();

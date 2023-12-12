@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:post_app/Feature/domain/entities/post_entities.dart';
 
+import '../screens/post_datails.dart';
+
 class PostWidget extends StatelessWidget {
   final List<PostEntities> posts;
   const PostWidget({super.key, required this.posts});
@@ -10,10 +12,18 @@ class PostWidget extends StatelessWidget {
     return ListView.builder(
       itemCount: posts.length,
       itemBuilder: (context, index) {
-        return Card(
-          child: ListTile(
-            title: Text(posts[index].title),
-            subtitle: Text(posts[index].body),
+        return InkWell(
+          onTap: () {
+            Navigator.of(context).push(MaterialPageRoute(
+                builder: (_) => PostDetails(
+                      post: posts[index],
+                    )));
+          },
+          child: Card(
+            child: ListTile(
+              title: Text(posts[index].title),
+              subtitle: Text(posts[index].body),
+            ),
           ),
         );
       },

@@ -58,7 +58,7 @@ class PostRepositoryImpl extends PostRepository {
   @override
   Future<Either<Failure, Unit>> updatePost(PostEntities post) {
     final PostModel postModel = PostModel(
-      id: post.id,
+      id: post.id!,
       title: post.title,
       body: post.body,
       
